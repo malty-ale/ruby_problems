@@ -15,7 +15,28 @@ end
 
 def bubble_sort(array)
   pair_compare(array) until array.sort == array
-  print array
+  putsS array
 end
 
-bubble_sort([4,3,78,2,0,2])
+#bubble_sort([4,3,78,2,0,2])
+
+
+def bubble_sort_by(array)
+  not_finished = true
+  while not_finished
+    not_finished = false
+    array.each_with_index do |i,j|
+      if j < array.length-1
+        if yield(array[j], array[j+1]) > 0
+          array[j], array[j+1] = array[j+1], array[j]
+          not_finished = true
+        end
+      end
+    end
+  end
+  puts array
+end
+
+bubble_sort_by(["hi","hello","hey","where","what","hi"]) do |i,j|
+  i.length - j.length
+end
