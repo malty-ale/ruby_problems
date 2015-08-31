@@ -67,10 +67,12 @@ module Enumerable
   
   def my_map(input_proc)
     result = []
-    self.my_each do |i|
-      if block_given?
+    if block_given?
+      self.my_each do |i|
         result << yield(input_proc.call(i))
-      else
+      end
+    else
+      self.my_each do |i|
         result << input_proc.call(i)
       end
     end
